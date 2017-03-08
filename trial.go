@@ -113,6 +113,7 @@ func Update(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 
 
 func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+/*
   var incidentInfo Incident
    incidentInfo = Incident{"1", "One", "d1", "o1", "s1"}
    bytes, err := json.Marshal (&incidentInfo)
@@ -120,6 +121,18 @@ func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string
           fmt.Println("Could not marshal incident info object", err)
           return nil, err
    }
+*/
+
+   if len(args) != 1 {
+     return nil, errors.New("Incorrect number of arguments. Expecting 1")
+   }
+
+   bytes, err := json.Marshal (&args[0])
+   if err != nil {
+          fmt.Println("Could not marshal incident info object", err)
+          return nil, err
+   }
+
    err = stub.PutState("1", bytes)
    if err != nil {
      fmt.Println("Could not save ", err)
@@ -130,19 +143,26 @@ func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 }
 
 func (t *SampleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-  if function == "Get" {
+fmt.Println("Inside Query function")
+  if function == "get" {
     return Get(stub, args)
   }
+  fmt.Println("Query could not find: " + function)
     return nil, nil
 }
 
 func (t *SampleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-  if function == "Create" {
+/*  if function == "init" {
+		return Init(stub, "init", args)
+  }
+  */
+  if function == "create" {
     return Create(stub, args)
   }
-  if function=="Update" {
+  if function=="update" {
     return Update(stub,args)
   }
+  fmt.Println("Invoke did not find func: " + function)
     return nil, nil
 }
 
