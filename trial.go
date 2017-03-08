@@ -53,7 +53,7 @@ func Get(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
         return nil, err
     }
 
-    var incidentInfo Incident
+   /* var incidentInfo Incident
     err = json.Unmarshal(piBytes, &incidentInfo)
     if err != nil {
       fmt.Println("Error in unmarshaling",err)
@@ -70,7 +70,8 @@ func Get(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
         fmt.Println("Not found id "+Id+" from ledger", err)
         return nil, err
     }
-    return Bytes, nil
+*/
+    return piBytes, nil
 }
 
 func Update(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
