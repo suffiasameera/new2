@@ -10,6 +10,7 @@ import "github.com/hyperledger/fabric/core/chaincode/shim"
 type SampleChaincode struct {
 }
 
+//Incident struct
 type Incident struct {
 IncidentID string `json:"iid"`
 IName string `json:"iname"`
