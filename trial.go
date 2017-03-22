@@ -262,7 +262,7 @@ func (t *SampleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
     return nil, nil
 }
 
-
+//Main function
 
 func main() {
     err := shim.Start(new(SampleChaincode))
